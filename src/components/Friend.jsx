@@ -2,7 +2,8 @@ import React from 'react';
 
 
 export function checkOnlineStatus(id) {
-  console.log('checking online status...');
+  console.log('starting online status check');
+
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(id % 2 === 0);
@@ -10,53 +11,36 @@ export function checkOnlineStatus(id) {
   });
 }
 
-// 1- build a setOnlineStatus function to update state
-// 2- componentDidMount
-// 3- componentDidUpdate
+// ONLINE STATUS
+// 1- implement a setOnlineStatus method to update state.isOnline
+// 2- componentDidMount to setOnlineStatus and listen for dbclicks on document
+// 3- bug: online status does not update when changing friends
+// 4- componentDidUpdate to setOnlineStatus when friend changes
+// 5- show to avoid componentDidUpdate using a key
+// REFRESH BUTTON
+// 1- implement refresh with componentWillReceiveProps
+// 2- refactor to use only componentDidUpdate
+// 3- refactor to use a key combining friend.id and a random id
+// 4- componentWillUnmount to clean up dbclick listener
+// 5- mention componentWillMount
 export default class Friend extends React.Component {
   state = {
     isOnline: false,
   }
 
-  componentWillMount() {
-    console.log('componentWillMount runs');
-  }
-
-  componentDidMount() {
-    console.log('about to fetch friend status in componentDidMount');
-    this.setOnlineStatus(this.props.friend.id);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.friend.id !== this.props.friend.id) {
-      console.log('about to check status in componentDidUpdate');
-      this.setOnlineStatus(this.props.friend.id);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.randomId !== nextProps.randomId) {
-      console.log('somebody hit refresh, componentWillReceiveProps');
-      this.setOnlineStatus(this.props.friend.id);
-    }
-  }
-
-  setOnlineStatus = () => {
-    checkOnlineStatus(this.props.friend.id)
-      .then(isOnline => {
-        console.log('uh, oh, calling setState...');
-        this.setState({ isOnline });
-      });
-  }
-
   render() {
     console.log('render function runs!');
+
+    const { isOnline } = this.state;
+    const { friend } = this.props;
+
     return (
       <div>
-        <h3>{this.props.friend.name}</h3>
-        <div style={{ color: this.state.isOnline ? 'green' : 'red' }}>
-          is {!this.state.isOnline && 'NOT '}online
-          {this.state.isOnline && ' :)'}
+        <h3>{friend.name}</h3>
+
+        <div style={{ color: isOnline ? 'green' : 'red' }}>
+          is {!isOnline && 'NOT '}online
+          {isOnline && ' :)'}
         </div>
       </div>
     );
