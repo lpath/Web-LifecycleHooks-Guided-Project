@@ -4,13 +4,13 @@ import Friend from './Friend';
 
 export default class FriendSelector extends React.Component {
   state = {
-    selectedFriendId: null,
+    currentFriendId: null,
   }
 
-  setCurrentFriend = id => this.setState({ selectedFriendId: id })
+  setCurrentFriendId = id => this.setState({ currentFriendId: id })
 
   getCurrentFriend = () => this.props.friends.find(
-    fr => fr.id === this.state.selectedFriendId,
+    fr => fr.id === this.state.currentFriendId,
   )
 
   render() {
@@ -22,7 +22,7 @@ export default class FriendSelector extends React.Component {
             return (
               <button
                 key={friend.id}
-                onClick={() => this.setCurrentFriend(friend.id)}
+                onClick={() => this.setCurrentFriendId(friend.id)}
               >
                 {friend.name}
               </button>
@@ -30,11 +30,11 @@ export default class FriendSelector extends React.Component {
           })
         }
         {
-          this.state.selectedFriendId &&
+          this.state.currentFriendId &&
           <Friend friend={this.getCurrentFriend()} />
         }
         <br />
-        <button onClick={() => this.setCurrentFriend(null)}>
+        <button onClick={() => this.setCurrentFriendId(null)}>
           Stop chatting
         </button>
       </div>
