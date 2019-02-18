@@ -7,7 +7,7 @@ export default class FriendSelector extends React.Component {
     selectedFriendId: null,
   }
 
-  selectFriend = id => this.setState({ selectedFriendId: id })
+  setCurrentFriend = id => this.setState({ selectedFriendId: id })
 
   getCurrentFriend = () => this.props.friends.find(
     fr => fr.id === this.state.selectedFriendId,
@@ -20,7 +20,10 @@ export default class FriendSelector extends React.Component {
         {
           this.props.friends.map(friend => {
             return (
-              <button key={friend.id} onClick={() => this.selectFriend(friend.id)}>
+              <button
+                key={friend.id}
+                onClick={() => this.setCurrentFriend(friend.id)}
+              >
                 {friend.name}
               </button>
             );
@@ -28,11 +31,12 @@ export default class FriendSelector extends React.Component {
         }
         {
           this.state.selectedFriendId &&
-          <Friend
-            friend={this.getCurrentFriend()}
-          />
+          <Friend friend={this.getCurrentFriend()} />
         }
         <br />
+        <button onClick={() => this.setCurrentFriend(null)}>
+          Stop chatting
+        </button>
       </div>
     );
   }
