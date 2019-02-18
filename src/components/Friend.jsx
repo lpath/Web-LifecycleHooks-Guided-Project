@@ -9,13 +9,24 @@ export function checkOnlineStatus(id) {
   });
 }
 
+// 1- build a setOnlineStatus function to update state
+// 2- componentDidMount
+// 3- componentDidUpdate
 export default class Friend extends React.Component {
   state = {
     isOnline: false,
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    console.log('fetching friend status after mounting in dom...');
     this.setOnlineStatus(this.props.friend.id);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.friend.id !== this.props.friend.id) {
+      console.log('checking status after updating dom...');
+      this.setOnlineStatus(this.props.friend.id);
+    }
   }
 
   setOnlineStatus = () => {
@@ -24,11 +35,14 @@ export default class Friend extends React.Component {
   }
 
   render() {
+    console.log('render function runs!');
     return (
       <div>
         <h3>{this.props.friend.name}</h3>
-        is {!this.state.isOnline && 'NOT '}online
-        {this.state.isOnline && ' :)'}
+        <div style={{ color: this.state.isOnline ? 'green' : 'red' }}>
+          is {!this.state.isOnline && 'NOT '}online
+          {this.state.isOnline && ' :)'}
+        </div>
       </div>
     );
   }
