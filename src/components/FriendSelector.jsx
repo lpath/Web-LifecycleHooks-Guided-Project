@@ -12,15 +12,14 @@ const friends = [
 export default class FriendSelector extends React.Component {
   state = {
     selectedFriendId: null,
+    refreshId: null,
   }
 
   selectFriend = id => this.setState({ selectedFriendId: id })
 
-  getCurrentFriend = () => {
-    return friends.find(
-      fr => fr.id === this.state.selectedFriendId,
-    );
-  }
+  getCurrentFriend = () => friends.find(
+    fr => fr.id === this.state.selectedFriendId,
+  )
 
   render() {
     return (
@@ -37,7 +36,10 @@ export default class FriendSelector extends React.Component {
         }
         {
           this.state.selectedFriendId &&
-          <Friend friend={this.getCurrentFriend()} />
+          <Friend
+            friend={this.getCurrentFriend()}
+            refreshId={this.state.refreshId}
+          />
         }
       </div>
     );
