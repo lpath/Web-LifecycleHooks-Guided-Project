@@ -14,6 +14,10 @@ export default class Friend extends React.Component {
     isOnline: false,
   }
 
+  componentWillMount() {
+    this.setOnlineStatus(this.props.friend.id);
+  }
+
   setOnlineStatus = () => {
     checkOnlineStatus(this.props.friend.id)
       .then(isOnline => this.setState({ isOnline }));
@@ -24,6 +28,7 @@ export default class Friend extends React.Component {
       <div>
         <h3>{this.props.friend.name}</h3>
         is {!this.state.isOnline && 'NOT '}online
+        {this.state.isOnline && ' :)'}
       </div>
     );
   }
