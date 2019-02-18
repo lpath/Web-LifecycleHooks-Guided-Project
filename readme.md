@@ -7,3 +7,7 @@
 
 # Objectives
   * Learn lifecycle hooks.
+
+# Steps
+  * We will be fleshing out a Friend component.
+  * Head over to `src/components/Friend.jsx` for step-by-step.
