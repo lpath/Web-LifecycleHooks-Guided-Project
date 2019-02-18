@@ -1,9 +1,9 @@
 import React from 'react';
-import './Container.less';
+import FriendSelector from './FriendSelector';
 
 
 export default function Container() {
   return (
-    <div className='container-hello-world'>Hello World</div>
+    <FriendSelector />
   );
 }
