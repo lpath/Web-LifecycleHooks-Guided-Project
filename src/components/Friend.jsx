@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { shape, number, string } from 'prop-types';
 
 export function checkOnlineStatus(id) {
   console.log('starting online status check');
@@ -50,3 +50,10 @@ export default class Friend extends React.Component {
     );
   }
 }
+
+Friend.propTypes = {
+  friend: shape({
+    id: number.isRequired,
+    name: string.isRequired,
+  }).isRequired,
+};
