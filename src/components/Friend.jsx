@@ -2,8 +2,6 @@ import React from 'react';
 import { shape, number, string } from 'prop-types';
 
 export function checkOnlineStatus(id) {
-  console.log('starting online status check');
-
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(id % 2 === 0);
