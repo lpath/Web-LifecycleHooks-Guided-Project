@@ -18,16 +18,14 @@ export default class FriendSelector extends React.Component {
       <div>
         Select a friend to chat with:&nbsp;
         {
-          this.props.friends.map(friend => {
-            return (
-              <button
-                key={friend.id}
-                onClick={() => this.setCurrentFriendId(friend.id)}
-              >
-                {friend.name}
-              </button>
-            );
-          })
+          this.props.friends.map(friend => (
+            <button
+              key={friend.id}
+              onClick={() => this.setCurrentFriendId(friend.id)}
+            >
+              {friend.name}
+            </button>
+          ))
         }
         {
           this.state.currentFriendId &&
