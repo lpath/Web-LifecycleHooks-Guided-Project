@@ -1,13 +1,6 @@
 import React from 'react';
+import { arrayOf, number, string, shape } from 'prop-types';
 import Friend from './Friend';
-
-
-const friends = [
-  { id: 1, name: 'Luke' },
-  { id: 2, name: 'Josh' },
-  { id: 3, name: 'Tom' },
-  { id: 4, name: 'Samar' },
-];
 
 export default class FriendSelector extends React.Component {
   state = {
@@ -16,7 +9,7 @@ export default class FriendSelector extends React.Component {
 
   selectFriend = id => this.setState({ selectedFriendId: id })
 
-  getCurrentFriend = () => friends.find(
+  getCurrentFriend = () => this.props.friends.find(
     fr => fr.id === this.state.selectedFriendId,
   )
 
@@ -25,7 +18,7 @@ export default class FriendSelector extends React.Component {
       <div>
         Select a friend to chat with:&nbsp;
         {
-          friends.map(friend => {
+          this.props.friends.map(friend => {
             return (
               <button key={friend.id} onClick={() => this.selectFriend(friend.id)}>
                 {friend.name}
@@ -44,3 +37,10 @@ export default class FriendSelector extends React.Component {
     );
   }
 }
+
+FriendSelector.propTypes = {
+  friends: arrayOf(shape({
+    id: number.isRequired,
+    name: string.isRequired,
+  })).isRequired,
+};
