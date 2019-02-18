@@ -11,19 +11,20 @@ export function checkOnlineStatus(id) {
 
 // ONLINE STATUS
 // 1- implement a setOnlineStatus method to update state.isOnline
-// 2- componentDidMount to setOnlineStatus and listen for dbclicks on document
-// 3- bug: online status does not update when changing friends
-// 4- componentDidUpdate to setOnlineStatus when friend changes
-// 5- show to avoid componentDidUpdate using a key
+// 2- implement componentDidMount to setOnlineStatus
+// 3- check if online status updates correctly when changing friends
+// 4- implement componentDidUpdate to setOnlineStatus when friend changes
+// 5- finish up componentDidUpdate comparing old props with new props
+// 6- show to avoid componentDidUpdate altogether using a key
+// 7- demonstrate componentWillUnmount
 // REFRESH BUTTON
 // 1- implement refresh with componentWillReceiveProps
 // 2- refactor to use only componentDidUpdate
 // 3- refactor to use a key combining friend.id and a random id
-// 4- componentWillUnmount to clean up dbclick listener
-// 5- mention componentWillMount
 export default class Friend extends React.Component {
   constructor(props) {
     console.log('constructor of Friend runs!');
+
     super(props);
     this.state = {
       isOnline: false,
