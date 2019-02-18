@@ -24,12 +24,16 @@ export function checkOnlineStatus(id) {
 // 4- componentWillUnmount to clean up dbclick listener
 // 5- mention componentWillMount
 export default class Friend extends React.Component {
-  state = {
-    isOnline: false,
+  constructor(props) {
+    console.log('constructor of Friend runs!');
+    super(props);
+    this.state = {
+      isOnline: false,
+    };
   }
 
   render() {
-    console.log('render function runs!');
+    console.log('render function of Friend runs!');
 
     const { isOnline } = this.state;
     const { friend } = this.props;
