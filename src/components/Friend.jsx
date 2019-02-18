@@ -10,10 +10,20 @@ export function checkOnlineStatus(id) {
 }
 
 export default class Friend extends React.Component {
+  state = {
+    isOnline: false,
+  }
+
+  setOnlineStatus = () => {
+    checkOnlineStatus(this.props.friend.id)
+      .then(isOnline => this.setState({ isOnline }));
+  }
+
   render() {
     return (
       <div>
-        <h3>{this.props.friend.name}</h3> is online
+        <h3>{this.props.friend.name}</h3>
+        is {!this.state.isOnline && 'NOT '}online
       </div>
     );
   }
