@@ -2,6 +2,7 @@ import React from 'react';
 
 
 export function checkOnlineStatus(id) {
+  console.log('checking online status...');
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(id % 2 === 0);
@@ -17,21 +18,35 @@ export default class Friend extends React.Component {
     isOnline: false,
   }
 
+  componentWillMount() {
+    console.log('componentWillMount runs');
+  }
+
   componentDidMount() {
-    console.log('fetching friend status after mounting in dom...');
+    console.log('about to fetch friend status in componentDidMount');
     this.setOnlineStatus(this.props.friend.id);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.friend.id !== this.props.friend.id) {
-      console.log('checking status after updating dom...');
+      console.log('about to check status in componentDidUpdate');
+      this.setOnlineStatus(this.props.friend.id);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.randomId !== nextProps.randomId) {
+      console.log('somebody hit refresh, componentWillReceiveProps');
       this.setOnlineStatus(this.props.friend.id);
     }
   }
 
   setOnlineStatus = () => {
     checkOnlineStatus(this.props.friend.id)
-      .then(isOnline => this.setState({ isOnline }));
+      .then(isOnline => {
+        console.log('uh, oh, calling setState...');
+        this.setState({ isOnline });
+      });
   }
 
   render() {

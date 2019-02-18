@@ -1,4 +1,5 @@
 import React from 'react';
+import uuid from 'uuid';
 import Friend from './Friend';
 
 
@@ -12,6 +13,7 @@ const friends = [
 export default class FriendSelector extends React.Component {
   state = {
     selectedFriendId: null,
+    randomId: null,
   }
 
   selectFriend = id => this.setState({ selectedFriendId: id })
@@ -19,6 +21,8 @@ export default class FriendSelector extends React.Component {
   getCurrentFriend = () => friends.find(
     fr => fr.id === this.state.selectedFriendId,
   )
+
+  setRandomId = () => this.setState({ randomId: uuid() })
 
   render() {
     return (
@@ -37,8 +41,11 @@ export default class FriendSelector extends React.Component {
           this.state.selectedFriendId &&
           <Friend
             friend={this.getCurrentFriend()}
+            randomId={this.state.randomId}
           />
         }
+        <br />
+        <button onClick={this.setRandomId}>Refresh friend</button>
       </div>
     );
   }
