@@ -32,6 +32,10 @@ export default class Friend extends React.Component {
     };
   }
 
+  componentWillUnmount() {
+    console.log('Friend is about to unmount');
+  }
+
   render() {
     console.log('render of Friend runs!');
 
