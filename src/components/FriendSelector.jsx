@@ -29,7 +29,10 @@ export default class FriendSelector extends React.Component {
         }
         {
           this.state.currentFriendId &&
-          <Friend friend={this.getCurrentFriend()} />
+          <Friend
+            key={this.state.currentFriendId}
+            friend={this.getCurrentFriend()}
+          />
         }
         <br />
         <button onClick={() => this.setCurrentFriendId(null)}>

@@ -1,6 +1,8 @@
 import React from 'react';
 import { shape, number, string } from 'prop-types';
 
+const cb = () => console.log('double click!');
+
 export function fakeCheckIfOnlineAjax(id) {
   console.log('network request starts');
   return new Promise(resolve => {
@@ -36,23 +38,34 @@ export default class Friend extends React.Component {
   }
 
   componentDidMount() {
+    document.addEventListener('dblclick', cb);
+
+    // start camera and record!!!!
+
     console.log('componentDidMount runs!');
     fakeCheckIfOnlineAjax(this.props.friend.id)
       .then(data => this.setState({ isOnline: data }));
   }
 
-  componentDidUpdate(prevProps) {
-    console.log('componentDidUpdate runs!');
-    const hasFriendChanged = prevProps.friend.id !== this.props.friend.id;
+  // componentDidUpdate(prevProps) {
+  //   console.log('componentDidUpdate runs!');
+  //   const hasFriendChanged = prevProps.friend.id !== this.props.friend.id;
 
-    if (hasFriendChanged) {
-      fakeCheckIfOnlineAjax(this.props.friend.id)
-        .then(data => this.setState({ isOnline: data }));
-    }
-  }
+  //   if (hasFriendChanged) {
+  //     console.log('friend has changed');
+  //     fakeCheckIfOnlineAjax(this.props.friend.id)
+  //       .then(data => this.setState({ isOnline: data }));
+  //   } else {
+  //     console.log('friend has NOT changed');
+  //   }
+  // }
 
   componentWillUnmount() {
+    // cancel network requests
+    // clean event listeners
+    // stopping the camera
     console.log('Friend is about to unmount');
+    document.removeEventListener('dblclick', cb);
   }
 
   render() {
