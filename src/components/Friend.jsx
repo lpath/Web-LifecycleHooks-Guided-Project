@@ -40,6 +40,12 @@ export default class Friend extends React.Component {
       .then(data => this.setState({ isOnline: data }));
   }
 
+  componentDidUpdate() {
+    console.log('componentDidUpdate runs!');
+    fakeCheckIfOnlineAjax(this.props.friend.id)
+      .then(data => this.setState({ isOnline: data }));
+  }
+
   componentWillUnmount() {
     console.log('Friend is about to unmount');
   }
