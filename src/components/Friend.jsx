@@ -4,7 +4,7 @@ import { shape, number, string } from 'prop-types';
 export function fakeCheckIfOnlineAjax(id) {
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve(id % 2 === 0);
+      resolve(id % 2 === 0); // "return" a boolean
     }, 1000);
   });
 }
