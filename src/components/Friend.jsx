@@ -28,8 +28,16 @@ export default class Friend extends React.Component {
 
     super(props);
     this.state = {
-      isOnline: false,
+      isOnline: props.isOnline,
     };
+
+    this.anyGlobal = null;
+  }
+
+  componentDidMount() {
+    console.log('componentDidMount runs!');
+    fakeCheckIfOnlineAjax(this.props.friend.id)
+      .then(data => this.setState({ isOnline: data }));
   }
 
   componentWillUnmount() {
@@ -37,7 +45,7 @@ export default class Friend extends React.Component {
   }
 
   render() {
-    console.log('render of Friend runs!');
+    console.log('render of Friend runs!'); // questionable
 
     const { isOnline } = this.state;
     const { friend } = this.props;
