@@ -8,8 +8,10 @@ const friends = [
   { id: 4, name: 'Samar' },
 ];
 
-export default function Container() {
-  return (
-    <FriendSelector friends={friends} />
-  );
+export default class Container extends React.Component {
+  render() {
+    return (
+      <FriendSelector friends={friends} />
+    );
+  }
 }
