@@ -33,7 +33,7 @@ export default class Friend extends React.Component {
   }
 
   render() {
-    console.log('render function of Friend runs!');
+    console.log('render of Friend runs!');
 
     const { isOnline } = this.state;
     const { friend } = this.props;
