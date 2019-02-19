@@ -10,6 +10,7 @@ export function fakeCheckIfOnlineAjax(id) {
 }
 
 // ONLINE STATUS
+// 0- discuss the constructor and the render method
 // 1- implement a setOnlineStatus method to update state.isOnline
 // 2- implement componentDidMount to setOnlineStatus
 // 3- check if online status updates correctly when changing friends
