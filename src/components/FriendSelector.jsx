@@ -32,6 +32,7 @@ export default class FriendSelector extends React.Component {
           <Friend
             key={this.state.currentFriendId}
             friend={this.getCurrentFriend()}
+            lady='GAGA'
           />
         }
         <br />

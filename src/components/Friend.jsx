@@ -37,17 +37,31 @@ export default class Friend extends React.Component {
     this.anyGlobal = null;
   }
 
-  componentDidMount() {
-    document.addEventListener('dblclick', cb);
+  // MAY FIX PROBLEMS WHERE RENDER FIRES MANY TIMES UNNECESSARILY
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return true;
+  // }
 
-    // start camera and record!!!!
+  // PREFER THIS TO componentWillReceiveProps
+  static getDerivedStateFromProps(props) {
+    return {
+      lady: props.lady,
+    };
+  }
+
+  // SAFE BECAUSE ALL OF THE DOM SURGERY IS DONE
+  componentDidMount() {
+    document.addEventListener('dblclick', cb); // add listeners
+    // start camera and record
 
     console.log('componentDidMount runs!');
-    fakeCheckIfOnlineAjax(this.props.friend.id)
+    fakeCheckIfOnlineAjax(this.props.friend.id) // start network requests
       .then(data => this.setState({ isOnline: data }));
   }
 
   // componentDidUpdate(prevProps) {
+  // NOT NECESSARY IN THIS CASE BECAUSE WE ARE USING A KEY (SEE PARENT)
+  // TO FORCE THE COMPONENT TO RECONSTRUCT ITSELF IF IT GETS A DIFFERENT FRIEND
   //   console.log('componentDidUpdate runs!');
   //   const hasFriendChanged = prevProps.friend.id !== this.props.friend.id;
 
@@ -61,14 +75,16 @@ export default class Friend extends React.Component {
   // }
 
   componentWillUnmount() {
+    // CLEAN UP AFTER YOUR COMPONENT!!!
     // cancel network requests
     // clean event listeners
-    // stopping the camera
+    // stop the camera
     console.log('Friend is about to unmount');
     document.removeEventListener('dblclick', cb);
   }
 
   render() {
+    // DON'T DO SIDE EFFECTS HERE! USE LIFECYCLES INSTEAD
     console.log('render of Friend runs!'); // questionable
 
     const { isOnline } = this.state;
