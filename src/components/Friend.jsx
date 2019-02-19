@@ -2,6 +2,7 @@ import React from 'react';
 import { shape, number, string } from 'prop-types';
 
 export function fakeCheckIfOnlineAjax(id) {
+  console.log('network request starts');
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(id % 2 === 0); // "return" a boolean
@@ -40,10 +41,14 @@ export default class Friend extends React.Component {
       .then(data => this.setState({ isOnline: data }));
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     console.log('componentDidUpdate runs!');
-    fakeCheckIfOnlineAjax(this.props.friend.id)
-      .then(data => this.setState({ isOnline: data }));
+    const hasFriendChanged = prevProps.friend.id !== this.props.friend.id;
+
+    if (hasFriendChanged) {
+      fakeCheckIfOnlineAjax(this.props.friend.id)
+        .then(data => this.setState({ isOnline: data }));
+    }
   }
 
   componentWillUnmount() {
