@@ -43,14 +43,21 @@ export default class Friend extends React.Component {
   // }
 
   // PREFER THIS TO componentWillReceiveProps
+  // THIS RUNS ON MOUNT, BUT ALSO ON UPDATES
   static getDerivedStateFromProps(props) {
     return {
       lady: props.lady,
     };
   }
 
-  // SAFE BECAUSE ALL OF THE DOM SURGERY IS DONE
+  // componentWillReceiveProps(nextProps) {
+  //   // AVOID IF POSSIBLE. IT USUALLY MEANS WE ARE DESPERATE
+  //   // TO MAKE SOME PIECE OF UI DEPEND ON INTERNAL STATE AND EXTERNAL PROPS
+  //   // AT THE SAME TIME.
+  // }
+
   componentDidMount() {
+    // SAFE BECAUSE ALL OF THE DOM SURGERY IS DONE
     document.addEventListener('dblclick', cb); // add listeners
     // start camera and record
 
@@ -60,8 +67,8 @@ export default class Friend extends React.Component {
   }
 
   // componentDidUpdate(prevProps) {
-  // NOT NECESSARY IN THIS CASE BECAUSE WE ARE USING A KEY (SEE PARENT)
-  // TO FORCE THE COMPONENT TO RECONSTRUCT ITSELF IF IT GETS A DIFFERENT FRIEND
+  //   // NOT NECESSARY IN THIS CASE BECAUSE WE ARE USING A KEY (SEE PARENT)
+  //   // TO FORCE THE COMPONENT TO RECONSTRUCT ITSELF IF IT GETS A DIFFERENT FRIEND
   //   console.log('componentDidUpdate runs!');
   //   const hasFriendChanged = prevProps.friend.id !== this.props.friend.id;
 
