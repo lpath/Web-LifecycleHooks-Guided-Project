@@ -51,8 +51,8 @@ export default class Friend extends React.Component {
   }
 
   // componentWillReceiveProps(nextProps) {
-  //   // AVOID IF POSSIBLE. IT USUALLY MEANS WE ARE DESPERATE
-  //   // TO MAKE SOME PIECE OF UI DEPEND ON INTERNAL STATE AND EXTERNAL PROPS
+  //   // AVOID IF POSSIBLE. IT USUALLY MEANS WE ARE DESPERATE TO FIX
+  //   // SOME PIECE OF UI THAT DEPENDS ON INTERNAL STATE AND EXTERNAL PROPS
   //   // AT THE SAME TIME.
   // }
 
